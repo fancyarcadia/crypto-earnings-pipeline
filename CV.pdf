@@ -1,0 +1,157 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 3409 >>
+stream
+BT
+/F1 10 Tf
+/F1 11 Tf
+1 0 0 1 50 800 Tm
+(MD ESMAIL HOSSEN) Tj
+/F1 10 Tf
+1 0 0 1 50 772 Tm
+(Software Engineer - Crypto-native builder - Dhaka, Bangladesh) Tj
+/F1 10 Tf
+1 0 0 1 50 744 Tm
+(Email: fancyarcadia@gmail.com | Portfolio: github.com/fancyarcadia/crypto-earnings-pipeline) Tj
+/F1 10 Tf
+1 0 0 1 50 716 Tm
+() Tj
+/F1 11 Tf
+1 0 0 1 50 688 Tm
+(PROFESSIONAL SUMMARY) Tj
+/F1 10 Tf
+1 0 0 1 50 660 Tm
+(Software engineer with hands-on experience building automation, APIs, and developer tooling.) Tj
+/F1 10 Tf
+1 0 0 1 50 632 Tm
+(Recently focused on blockchain/web3 workflows: designing an automated crypto-earning pipeline) Tj
+/F1 10 Tf
+1 0 0 1 50 604 Tm
+((bounty monitoring, GitHub automation, multi-chain payouts). Comfortable across the full) Tj
+/F1 10 Tf
+1 0 0 1 50 576 Tm
+(stack of a small project - from scripting and integration to documentation and reporting.) Tj
+/F1 10 Tf
+1 0 0 1 50 548 Tm
+(Remote-ready, detail-oriented, and fluent in English.) Tj
+/F1 10 Tf
+1 0 0 1 50 520 Tm
+() Tj
+/F1 11 Tf
+1 0 0 1 50 492 Tm
+(TECHNICAL SKILLS) Tj
+/F1 10 Tf
+1 0 0 1 50 464 Tm
+(- Languages/Stack: JavaScript/TypeScript, Node.js, HTML/CSS, Bash/Shell) Tj
+/F1 10 Tf
+1 0 0 1 50 436 Tm
+(- APIs & Integration: REST APIs, GitHub API, webhooks, MCP-based tooling) Tj
+/F1 10 Tf
+1 0 0 1 50 408 Tm
+(- Automation: scripting, daemon processes, data pipelines) Tj
+/F1 10 Tf
+1 0 0 1 50 380 Tm
+(- Blockchain/Web3: wallets & multi-chain operations (Solana, Base, Ethereum), stablecoins) Tj
+/F1 10 Tf
+1 0 0 1 50 352 Tm
+(  (USDC/USDT), on-chain data reading) Tj
+/F1 10 Tf
+1 0 0 1 50 324 Tm
+(- AI-assisted workflow: drafting, review, documentation, process automation) Tj
+/F1 10 Tf
+1 0 0 1 50 296 Tm
+(- Tools: Git/GitHub, VS Code, Markdown, CSV/JSON, Google Docs, Linux) Tj
+/F1 10 Tf
+1 0 0 1 50 268 Tm
+() Tj
+/F1 11 Tf
+1 0 0 1 50 240 Tm
+(PROJECTS) Tj
+/F1 11 Tf
+1 0 0 1 50 212 Tm
+(Crypto Earnings Pipeline - Independent Project (2026)) Tj
+/F1 10 Tf
+1 0 0 1 50 184 Tm
+(- Built an automated system that polls GitHub for newly posted rewarded bounties and alerts) Tj
+/F1 10 Tf
+1 0 0 1 50 156 Tm
+(  within minutes) Tj
+/F1 10 Tf
+1 0 0 1 50 128 Tm
+(- Auto-claims eligible tasks and prepares pull requests via the GitHub API) Tj
+/F1 10 Tf
+1 0 0 1 50 100 Tm
+(- Tracks payouts across wallets with a ledger and automated weekly reports) Tj
+/F1 10 Tf
+1 0 0 1 50 72 Tm
+(- Security best practices: scoped tokens, locked local keys, no secret leakage) Tj
+/F1 10 Tf
+1 0 0 1 50 44 Tm
+(Public showcase: https://github.com/fancyarcadia/crypto-earnings-pipeline) Tj
+/F1 10 Tf
+1 0 0 1 50 16 Tm
+() Tj
+/F1 11 Tf
+1 0 0 1 50 -12 Tm
+(WORK EXPERIENCE) Tj
+/F1 11 Tf
+1 0 0 1 50 -40 Tm
+(Software Engineer - Freelance / Independent) Tj
+/F1 10 Tf
+1 0 0 1 50 -68 Tm
+(- Developed and maintained backend services with Node.js; integrated third-party APIs) Tj
+/F1 10 Tf
+1 0 0 1 50 -96 Tm
+(- Automated repetitive operations (scripts, cron/daemon processes)) Tj
+/F1 10 Tf
+1 0 0 1 50 -124 Tm
+(- Documented systems and collaborated remotely with cross-functional teams) Tj
+/F1 10 Tf
+1 0 0 1 50 -152 Tm
+() Tj
+/F1 11 Tf
+1 0 0 1 50 -180 Tm
+(EDUCATION) Tj
+/F1 10 Tf
+1 0 0 1 50 -208 Tm
+(Ongoing self-education: blockchain fundamentals, web3, automation engineering) Tj
+/F1 10 Tf
+1 0 0 1 50 -236 Tm
+() Tj
+/F1 11 Tf
+1 0 0 1 50 -264 Tm
+(LANGUAGES) Tj
+/F1 10 Tf
+1 0 0 1 50 -292 Tm
+(- English - professional working proficiency) Tj
+/F1 10 Tf
+1 0 0 1 50 -320 Tm
+(- Bengali - native) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000003701 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+3771
+%%EOF
