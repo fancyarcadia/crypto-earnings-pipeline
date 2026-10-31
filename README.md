@@ -40,3 +40,5 @@ Four teams working together: **Research → Agent Research → Execution → Tre
 4. Start with small tasks to build reputation; scale up.
 
 *Report generated: 2026-10-31. Platform details change — re-run the Scanner before committing time.*
+
+This is an E2E simulation: identification test.
