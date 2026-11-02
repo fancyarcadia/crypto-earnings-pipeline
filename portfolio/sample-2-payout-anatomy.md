@@ -10,7 +10,7 @@ I've been tracking payouts across Ethereum, Solana, Base, and BNB Chain for mont
 
 ## 1. The payout rail is decided *before* the work starts
 
-Every platform pays on a specific rail: Superteam and Clustly pay USDC on Solana; Dework pays USDC/USDT on Ethereum; Stacker News pays Bitcoin via Lightning; Algora pays USD via Stripe. Knowing the rail in advance tells you the gas cost, the expected settlement time, and whether KYC will appear at payout. **The #1 mistake is agreeing to work before asking "how will I be paid?** — the answer changes your net take-home by more than any fee negotiation.
+Every platform pays on a specific rail: Superteam and Clustly pay USDC on Solana; Dework pays USDC/USDT on Ethereum; Stacker News pays Bitcoin via Lightning; Algora used to pay USD via Stripe but pivoted to recruiting in 2026. Knowing the rail in advance tells you the gas cost, the expected settlement time, and whether KYC will appear at payout. **The #1 mistake is agreeing to work before asking "how will I be paid?** — the answer changes your net take-home by more than any fee negotiation.
 
 ## 2. "Payment sent" is not a payment
 
