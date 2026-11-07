@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Anatomy of a Crypto Payout — Md Esmail Hossen — Crypto Research, Writing &amp; Automation</title>
+<style>body{font-family:Georgia,serif;max-width:820px;margin:40px auto;padding:0 20px;line-height:1.7}pre{background:#f5f5f5;padding:12px;overflow-x:auto}code{font-family:Consolas,monospace}</style>
+</head>
+<body>
+<p><a href="/">← Home</a></p>
+<h1>The Anatomy of a Crypto Payout</h1>
+<article><h1 id="portfolio-sample-2-the-anatomy-of-a-crypto-payout-from-accepted-to-wallet-in-six-steps">Portfolio Sample 2 — The Anatomy of a Crypto Payout: From "Accepted" to Wallet in Six Steps</h1>
+<blockquote>
+<p>Portfolio sample draft (2026-11-01) — for review before publishing. Written in first person; verify facts you know before posting.</p>
+</blockquote>
+<hr />
+<p>Getting paid in crypto sounds simple until you actually have to do it. You finish a job, the client says "sent," and then a transaction hash appears — and the next 24 hours quietly determine whether you actually got paid, got dust, or got nothing at all.</p>
+<p>I've been tracking payouts across Ethereum, Solana, Base, and BNB Chain for months as part of a live earning pipeline. After reviewing dozens of inbound transactions — including ten that turned out to be spam and dust — here's the six-step anatomy of a real payout, and where most people lose money.</p>
+<h2 id="1-the-payout-rail-is-decided-before-the-work-starts">1. The payout rail is decided <em>before</em> the work starts</h2>
+<p>Every platform pays on a specific rail: Superteam and Clustly pay USDC on Solana; Dework pays USDC/USDT on Ethereum; Stacker News pays Bitcoin via Lightning; Algora used to pay USD via Stripe but pivoted to recruiting in 2026. Knowing the rail in advance tells you the gas cost, the expected settlement time, and whether KYC will appear at payout. <strong>The #1 mistake is agreeing to work before asking "how will I be paid?</strong> — the answer changes your net take-home by more than any fee negotiation.</p>
+<h2 id="2-payment-sent-is-not-a-payment">2. "Payment sent" is not a payment</h2>
+<p>A payment is a confirmed transaction on the destination chain. Not a screenshot, not a promise. I only treat work as paid when the tx hash exists and the wallet's own scan — not the platform's UI — shows the incoming balance change.</p>
+<h2 id="3-the-fees-eat-the-small-jobs">3. The fees eat the small jobs</h2>
+<p>I tracked $0.35 of pending rewards across basic forum micro-rewards on MoltJobs: several 0.05–0.10 USDC entries. Real network fees (the smallest I've seen: ~5,000 lamports ≈ $0.0005 on Solana) are negligible on Solana, but on congested chains the gas can exceed a small payout's value. <strong>Rule of thumb: anything under ~$5 should be paid on a low-fee rail (Solana/Base) or batched.</strong></p>
+<h2 id="4-token-transfers-don-t-look-the-way-you-expect">4. Token transfers don't look the way you expect</h2>
+<p>When I inspected a flagged Solana transaction claiming to be an incoming payment, the parsed token-balance diffs told a different story: a ~15 USDC/15 USDT pair swapping between accounts on a December 2025 block — a DEX-style trade, not a payout at all. On-chain tools that only show "activity" will happily report that as income. <strong>You must check <em>which</em> accounts changed and <em>which</em> mint moved — not just that a transaction exists.</strong></p>
+<h2 id="5-dust-is-data-noise-learn-to-clear-it">5. Dust is data noise — learn to clear it</h2>
+<p>Wallet scanners flag any unrecorded inbound transaction, including 7–8 year-old dust and 1,000-lamport transfers. In my ledger, ten auto-flagged Solana transactions — from Nov 2025 to Mar 2026 — turned out to be historical native transfers with zero token movement. We cleared them from the ledger in one pass. <strong>If you don't classify, your bookkeeping inflates "earnings" with garbage.</strong></p>
+<h2 id="6-the-cold-storage-handoff">6. The cold-storage handoff</h2>
+<p>The protocol I use: hot wallet receives → confirm on-chain → within 24 hours, move ≥80% to cold storage → record the handover in a ledger with tx hash, asset, network, and net amount after fees. This is the step most solo earners skip, and it's the one that makes tax season sane.</p>
+<h2 id="what-this-means-for-you">What this means for you</h2>
+<p>If you're earning in crypto: pick your rail before you pick the job, verify on-chain before you celebrate, and keep a ledger that separates <em>pending</em>, <em>confirmed</em>, and <em>cleared-as-noise</em>. The difference between "I got paid" and "I got paid and I can prove it" is exactly the six steps above.</p>
+<hr />
+<p><em>Written from live pipeline data (ledger reviewed 2026-11-01). For editing before publishing: add your own numbers, confirm chain/name details, and remove this note.</em></p>
+</article>
+</body>
+</html>

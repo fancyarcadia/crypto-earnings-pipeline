@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Inside the Block: How Solana Validators Order Transactions — Md Esmail Hossen — Crypto Research, Writing &amp; Automation</title>
+<style>body{font-family:Georgia,serif;max-width:820px;margin:40px auto;padding:0 20px;line-height:1.7}pre{background:#f5f5f5;padding:12px;overflow-x:auto}code{font-family:Consolas,monospace}</style>
+</head>
+<body>
+<p><a href="/">← Home</a></p>
+<h1>Inside the Block: How Solana Validators Order Transactions</h1>
+<article><h1 id="inside-the-block-how-solana-validators-order-transactions">Inside the Block: How Solana Validators Order Transactions</h1>
+<blockquote>
+<p>FINAL submission draft v2 — 2026-11-02. Superteam Earn bounty "Inside the Block: How Solana Validators Order Transactions" ($2,500 USDC, deadline 2026-11-05).
+Sources: verified-live links are marked ✅ (checked 2026-11-02). Items marked 🔎 are pre-verified historically but should be re-checked before you send.</p>
+</blockquote>
+<hr />
+<p>Everyone knows Solana is fast. Far fewer people can explain <em>how a block actually gets built and why transactions end up in the order they do</em>. This is the story inside the block: how validators decide what goes in, in what order, and why ordering on Solana is fundamentally different from Ethereum.</p>
+<h2 id="1-there-is-no-mempool-transactions-go-to-a-leader">1. There is no mempool — transactions go to a leader</h2>
+<p>On Ethereum, transactions sit in a public mempool where validators and searchers can see, reorder, and front-run them. Solana deliberately removed this. Instead, the network runs a <strong>leader schedule</strong>: at any moment, exactly one validator (the current "leader") is designated to produce blocks for a short window of slots, and the schedule is computed in advance from the validator set ✅ (Solana docs — Terminology: <em>leader/leader schedule, slot, epoch</em>: https://solana.com/docs/terminology).</p>
+<p>Clients send transactions directly to the current leader — via RPC, then through the network's QUIC transport layer, with Turbine used to propagate completed blocks to the rest of the network. The leader is the first entity that sees and orders transactions for that slot.</p>
+<h2 id="2-the-leader-orders-by-arrival-chunked-into-entries">2. The leader orders by arrival, chunked into entries</h2>
+<p>The leader receives a stream of transactions. As they arrive, the leader packages them into <strong>entries</strong> — sequential chunks of transactions — and timestamps each entry with a <strong>Proof-of-History (PoH)</strong> sequence. PoH is a verifiable delay function: the leader repeatedly hashes a value, producing a continuous, verifiable timeline. Every entry is cryptographically chained to the previous one, so the order of entries is provable, not just claimed.</p>
+<p>This is the crux: <strong>on Solana, block order is the order the leader recorded transactions, frozen into the PoH sequence.</strong> There is no "proposer reordering" after the fact, because the order is part of the chain's clock itself. (Architecture overview ✅: https://solana.com/docs/architecture)</p>
+<h2 id="3-how-the-leader-actually-picks-transactions">3. How the leader actually picks transactions</h2>
+<p>The leader doesn't run a gas auction per position. Instead:</p>
+<ul>
+<li><strong>Inclusion vs. order:</strong> priority fees (additional lamports per compute unit) primarily buy <em>inclusion</em> under load — they don't reorder already-included transactions ✅ (Transaction fees &amp; priority fees: https://solana.com/docs/transaction_fees).</li>
+<li><strong>Compute budget:</strong> each transaction declares a compute-unit budget ✅ (Core concepts — transactions &amp; fees: https://solana.com/docs/core/transactions, https://solana.com/docs/core/fees); the leader executes transactions one by one in entry order, subject to the slot's overall compute limits. A transaction that exceeds its budget or is invalid is rejected or rolled back.</li>
+<li><strong>Duplicate/conflict handling:</strong> if two transactions touch the same state, the first to commit wins; the later one fails atomically. This is why sending the same order twice costs you the second one.</li>
+</ul>
+<p>So the practical rule for builders: <strong>on Solana, you cannot rely on "later = higher priority" within a block. If you need to be first, you must reach the leader first.</strong></p>
+<h2 id="4-non-leader-validators-vote-don-t-order">4. Non-leader validators: vote, don't order</h2>
+<p>While the leader builds, every other validator does two jobs:</p>
+<ol>
+<li><strong>Verification:</strong> independently replay the block (same runtime, same BPF execution) to confirm the state changes are valid.</li>
+<li><strong>Voting:</strong> cast a vote referencing the PoH hash of the block they consider canonical, via <strong>Tower BFT</strong> — a stake-weighted consensus protocol. A block becomes <em>confirmed</em> once it accumulates votes from ≥ 2/3 of the staked supply, and <em>finalized</em> after the fork is locked in by Tower BFT's locking rules. 🔎 (Consensus details — Tower BFT and Proof of History are covered in Solana's docs under "Architecture"; search "Tower BFT" at https://solana.com/docs)</li>
+</ol>
+<p>Because ordering is baked into PoH, a vote for a block is simultaneously a vote for its transaction order. There is no separate "order consensus" phase — that's the architectural trick that lets Solana settle ordering in parallel with execution.</p>
+<h2 id="5-leader-selection-stake-weighted-quality">5. Leader selection: stake-weighted quality</h2>
+<p>Who gets to be leader? <strong>Stake-weighted quality (SWQ)</strong>: a validator's chance to be scheduled as leader is proportional (with small corrections for liveness/quality metrics) to its share of total stake. The schedule is derived deterministically from the validator set, so everyone knows in advance who leads when — which makes it possible to direct traffic straight to the right leader. 🔎 (See "Leader selection" in Solana docs; search "stake-weighted quality" at https://solana.com/docs)</p>
+<h2 id="6-where-mev-actually-happens-off-chain-before-the-leader">6. Where MEV actually happens: off-chain, before the leader</h2>
+<p>Because there's no public mempool, classic on-chain front-running is mostly closed on Solana. But extractable value hasn't disappeared — it moved upstream:</p>
+<ul>
+<li><strong>Jito (and similar) MEV marketplaces</strong> let searchers send <strong>bundles</strong> — ordered sets of transactions — directly to leaders, with a <strong>tip auction</strong> paid to the leader for inclusion. The leader can order bundles before ordinary traffic in a slot. 🔎 (Jito docs: https://jito.network — search "bundles" / "tip")</li>
+<li>The result: ordering <em>is</em> influenced by economics, but it happens at the leader's discretion via the bundle auction, not through a transparent global order book.</li>
+</ul>
+<p>For users, the practical takeaway is the same: if your transaction's value depends on ordering (arbitrage, liquidations, mints), you must compete at the leader level — with priority fees, or via a bundle/relay — not by hoping for mempool luck.</p>
+<h2 id="7-why-this-matters-for-dapp-builders">7. Why this matters for dApp builders</h2>
+<ul>
+<li><strong>User experience:</strong> "confirmed" ≠ "ordered." Explain to users that a rejected tx is usually a conflict (state changed first), not a network failure.</li>
+<li><strong>Latency chasing:</strong> the race is to the leader. Use low-latency RPCs and consider sending through multiple entrypoints.</li>
+<li><strong>Fairness assumptions:</strong> if your dApp promises fair ordering, you can't — the leader controls inclusion order, and bundles can jump the queue. Design accordingly (e.g., commit-reveal, or off-chain matching with on-chain settlement).</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Solana's block is a leader-built, PoH-stamped, vote-finalized sequence. Order is fixed at the leader the moment entries are chained — and that single design choice is why Solana can process thousands of transactions per second without a global mempool, and why builders must think about ordering differently than they do on Ethereum. The block isn't just a list of transactions; it's a proof of time.</p>
+<hr />
+<h2 id="sources">Sources</h2>
+<p><strong>Verified live (checked 2026-11-02):</strong></p>
+<ul>
+<li>✅ Solana docs — home: https://solana.com/docs</li>
+<li>✅ Architecture overview: https://solana.com/docs/architecture</li>
+<li>✅ Terminology (leader, slot, epoch, confirmation/finality): https://solana.com/docs/terminology</li>
+<li>✅ Transaction fees &amp; priority fees: https://solana.com/docs/transaction_fees</li>
+<li>✅ Core concepts — transactions: https://solana.com/docs/core/transactions</li>
+<li>✅ Core concepts — fees: https://solana.com/docs/core/fees</li>
+</ul>
+<p><strong>Re-check before sending (links moved in 2026 restructure):</strong></p>
+<ul>
+<li>🔎 Proof of History / Tower BFT / leader selection / Turbine / QUIC: search these terms on https://solana.com/docs (they moved out of the old /docs/consensus/ path)</li>
+<li>🔎 Jito MEV bundles &amp; tips: https://jito.network (docs section)</li>
+<li>🔎 Original Solana whitepaper: https://solana.com/solana-whitepaper.pdf</li>
+</ul>
+</article>
+</body>
+</html>

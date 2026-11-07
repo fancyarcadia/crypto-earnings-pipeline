@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+Allow: /
+Sitemap: https://fancyarcadia.github.io/crypto-earnings-pipeline-site/sitemap.xml
